@@ -56,9 +56,6 @@ class Employee:
     def get_pay(self):
         return self.calculate_pay()
 
-    def __str__(self):
-        return self.calculate_pay()
-
 # Billie works on a monthly salary of 4000.  Their total pay is 4000.
 billie = Employee('Billie')
 billie.set_salary_contract(4000)
