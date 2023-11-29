@@ -38,7 +38,6 @@ class Employee:
             total_pay += self.monthly_salary
         elif self.contract_type == "Hourly":
             total_pay += self.hourly_wage * self.hours_worked
-
         # Commission calculation
         if self.commission_type == "Bonus":
             total_pay += self.commission_value
@@ -56,13 +55,11 @@ class Employee:
             pay_details += f"{self.name} works on a monthly salary of {self.monthly_salary}."
         elif self.contract_type == "Hourly":
             pay_details += f"{self.name} works on a contract of {self.hours_worked} hours at {self.hourly_wage}/hour."
-
         # Commission description
         if self.commission_type == "Bonus":
             pay_details += f" and receives a bonus commission of {self.commission_value}."
         elif self.commission_type == "Contract":
             pay_details += f" and receives a commission for {self.num_contracts} contract(s) at {self.commission_value}/contract."
-
         # Append total pay
         pay_details += f" Their total pay is {self.calculate_pay()}."
         return pay_details
