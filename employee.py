@@ -30,44 +30,31 @@ class Employee:
         self.num_contracts = contracts
         self.commission_value = commission_per_contract
 
-    def get_pay(self):
+    def calculate_pay(self):
         total_pay = 0
 
         if self.contract_type == "Salary":
             total_pay += self.monthly_salary
+            pay_details = f"{self.name} works on a monthly salary of {self.monthly_salary}."
 
         elif self.contract_type == "Hourly":
             total_pay += self.hourly_wage * self.hours_worked
+            pay_details = f"{self.name} works on a contract of {self.hours_worked} hours at {self.hourly_wage}/hour."
 
         if self.commission_type == "Bonus":
             total_pay += self.commission_value
-
-        elif self.commission_type == "Contract":
-            total_pay += self.num_contracts * self.commission_value
-
-        return total_pay
-
-    def __str__(self):
-        pay_details = ""
-
-        if self.contract_type == "Salary":
-            pay_details += f"{self.name} works on a monthly salary of {self.monthly_salary}."
-
-        elif self.contract_type == "Hourly":
-            pay_details += f"{self.name} works on a contract of {self.hours_worked} hours at {self.hourly_wage}/hour."
-
-        if self.commission_type == "Bonus":
             pay_details += f" and receives a bonus commission of {self.commission_value}."
 
-        elif self.commission_type == "Contract":
+        if self.commission_type == "Contract":
+            commission_earned = self.num_contracts * self.commission_value
+            total_pay += commission_earned
             pay_details += f" and receives a commission for {self.num_contracts} contract(s) at {self.commission_value}/contract."
 
-        pay_details += f" Their total pay is {self.get_pay()}."
+        pay_details += f" Their total pay is {total_pay}."
         return pay_details
 
-
-# Similarly, you can create classes for HourlyEmployee with bonus and contract commission
-
+    def get_pay(self):
+        return self.calculate_pay()
 
 # Billie works on a monthly salary of 4000.  Their total pay is 4000.
 billie = Employee('Billie')
