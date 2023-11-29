@@ -33,35 +33,37 @@ class Employee:
     def calculate_pay(self):
         total_pay = 0
 
+        # Salary or hourly pay calculation
         if self.contract_type == "Salary":
             total_pay += self.monthly_salary
-
         elif self.contract_type == "Hourly":
             total_pay += self.hourly_wage * self.hours_worked
 
+        # Commission calculation
         if self.commission_type == "Bonus":
             total_pay += self.commission_value
-
         elif self.commission_type == "Contract":
             total_pay += self.num_contracts * self.commission_value
 
         return total_pay
 
     def __str__(self):
+        # Initialize pay_details with an empty string
         pay_details = ""
 
+        # Salary or hourly description
         if self.contract_type == "Salary":
             pay_details += f"{self.name} works on a monthly salary of {self.monthly_salary}."
-
         elif self.contract_type == "Hourly":
             pay_details += f"{self.name} works on a contract of {self.hours_worked} hours at {self.hourly_wage}/hour."
 
+        # Commission description
         if self.commission_type == "Bonus":
             pay_details += f" and receives a bonus commission of {self.commission_value}."
-
         elif self.commission_type == "Contract":
             pay_details += f" and receives a commission for {self.num_contracts} contract(s) at {self.commission_value}/contract."
 
+        # Append total pay
         pay_details += f" Their total pay is {self.calculate_pay()}."
         return pay_details
 
