@@ -4,75 +4,67 @@
 class Employee:
     def __init__(self, name):
         self.name = name
+        self.contract_type = None
+        self.hourly_wage = None
+        self.hours_worked = None
+        self.monthly_salary = None
+        self.commission_type = None
+        self.commission_value = 0
+        self.num_contracts = 0
+
+    def set_salary_contract(self, salary):
+        self.contract_type = "Salary"
+        self.monthly_salary = salary
+
+    def set_hourly_contract(self, wage, hours):
+        self.contract_type = "Hourly"
+        self.hourly_wage = wage
+        self.hours_worked = hours
+
+    def set_bonus_commission(self, bonus):
+        self.commission_type = "Bonus"
+        self.commission_value = bonus
+
+    def set_contract_commission(self, contracts, commission_per_contract):
+        self.commission_type = "Contract"
+        self.num_contracts = contracts
+        self.commission_value = commission_per_contract
 
     def get_pay(self):
-        raise NotImplementedError
+        total_pay = 0
+
+        if self.contract_type == "Salary":
+            total_pay += self.monthly_salary
+
+        elif self.contract_type == "Hourly":
+            total_pay += self.hourly_wage * self.hours_worked
+
+        if self.commission_type == "Bonus":
+            total_pay += self.commission_value
+
+        elif self.commission_type == "Contract":
+            total_pay += self.num_contracts * self.commission_value
+
+        return total_pay
 
     def __str__(self):
-        raise NotImplementedError
+        pay_details = ""
 
-class SalaryEmployee(Employee):
-    def __init__(self, name, salary):
-        super().__init__(name)
-        self.salary = salary
+        if self.contract_type == "Salary":
+            pay_details += f"{self.name} works on a monthly salary of {self.monthly_salary}."
 
-    def get_pay(self):
-        return self.salary
+        elif self.contract_type == "Hourly":
+            pay_details += f"{self.name} works on a contract of {self.hours_worked} hours at {self.hourly_wage}/hour."
 
-    def __str__(self):
-        return f"{self.name} works on a monthly salary of {self.salary}. Their total pay is {self.get_pay()}."
+        if self.commission_type == "Bonus":
+            pay_details += f" and receives a bonus commission of {self.commission_value}."
 
-class HourlyEmployee(Employee):
-    def __init__(self, name, hourly_wage, hours_worked):
-        super().__init__(name)
-        self.hourly_wage = hourly_wage
-        self.hours_worked = hours_worked
+        elif self.commission_type == "Contract":
+            pay_details += f" and receives a commission for {self.num_contracts} contract(s) at {self.commission_value}/contract."
 
-    def get_pay(self):
-        return self.hourly_wage * self.hours_worked
+        pay_details += f" Their total pay is {self.get_pay()}."
+        return pay_details
 
-    def __str__(self):
-        return f"{self.name} works on a contract of {self.hours_worked} hours at {self.hourly_wage}/hour. Their total pay is {self.get_pay()}."
-
-# Example of a mixin for bonus commission
-class BonusCommissionMixin:
-    def __init__(self, bonus):
-        self.bonus = bonus
-
-    def get_bonus_pay(self):
-        return self.bonus
-
-    def __str__(self):
-        return super().__str__() + f" and receives a bonus commission of {self.bonus}."
-
-# Example of a mixin for contract commission
-class ContractCommissionMixin:
-    def __init__(self, num_contracts, commission_per_contract):
-        self.num_contracts = num_contracts
-        self.commission_per_contract = commission_per_contract
-
-    def get_contract_commission_pay(self):
-        return self.num_contracts * self.commission_per_contract
-
-    def __str__(self):
-        return super().__str__() + f" and receives a commission for {self.num_contracts} contract(s) at {self.commission_per_contract}/contract."
-
-# Examples of combined classes
-class SalaryEmployeeWithBonus(SalaryEmployee, BonusCommissionMixin):
-    def __init__(self, name, salary, bonus):
-        SalaryEmployee.__init__(self, name, salary)
-        BonusCommissionMixin.__init__(self, bonus)
-
-    def get_pay(self):
-        return super().get_pay() + self.get_bonus_pay()
-
-class SalaryEmployeeWithContractCommission(SalaryEmployee, ContractCommissionMixin):
-    def __init__(self, name, salary, num_contracts, commission_per_contract):
-        SalaryEmployee.__init__(self, name, salary)
-        ContractCommissionMixin.__init__(self, num_contracts, commission_per_contract)
-
-    def get_pay(self):
-        return super().get_pay() + self.get_contract_commission_pay()
 
 # Similarly, you can create classes for HourlyEmployee with bonus and contract commission
 
