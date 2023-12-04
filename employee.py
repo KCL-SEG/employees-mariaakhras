@@ -20,49 +20,49 @@ class Employee:
     def set_comm(self, comm_pay, no_of_contracts=0):
         self.comm_pay = comm_pay
         self.no_of_contracts = no_of_contracts
-        
-    def set_bonus(self, bonus_pay):
+
+        def set_bonus(self, bonus_pay):
          self.bonus_pay = bonus_pay
 
     def get_salary(self):
-        return self.salary_pay + self.comm_pay * self.hourly_pay
+         return self.salary_pay + self.comm_pay * self.hourly_pay
 
     def get_comm(self):
-        return self.comm_pay * self.no_of_contracts + self.bonus_pay
+         return self.comm_pay * self.no_of_contracts + self.bonus_pay
 
     def get_pay(self):
-        salary_total = self.salary_pay
-        hourly_total = self.hourly_pay * self.hours_worked
-        comm_total = self.comm_pay * self.no_of_contracts
-        bonus_total = self.bonus_pay
+         salary_total = self.salary_pay
+         hourly_total = self.hourly_pay * self.hours_worked
+         comm_total = self.comm_pay * self.no_of_contracts
+         bonus_total = self.bonus_pay
 
-        return salary_total + hourly_total + comm_total + bonus_total
+         return salary_total + hourly_total + comm_total + bonus_total
 
     def __str__(self):
         employee = f"{self.name} works on a "
         employee = f"{self.name} works on "
 
         if self.salary_pay > 0:
-            employee += f"monthly salary of {self.salary_pay} "
-            employee += f"a monthly salary of {self.salary_pay}"
+             employee += f"monthly salary of {self.salary_pay} "
+             employee += f"a monthly salary of {self.salary_pay}"
         elif self.hourly_pay > 0 and self.hours_worked > 0:
-            employee += f"contract of {self.hours_worked} hours at {self.hourly_pay}/hour "
-            employee += f"a contract of {self.hours_worked} hours at {self.hourly_pay}/hour"
+             employee += f"contract of {self.hours_worked} hours at {self.hourly_pay}/hour "
+             employee += f"a contract of {self.hours_worked} hours at {self.hourly_pay}/hour"
 
         if self.comm_pay > 0:
-            employee += "and receives a commission for "
-            if self.no_of_contracts > 0:
-                employee += f"{self.no_of_contracts} contract(s) at {self.comm_pay}/contract "
-            else:
-                employee += f"a bonus commission of {self.comm_pay} "
-                if self.salary_pay > 0 or (self.hourly_pay > 0 and self.hours_worked > 0):
-                    employee += " and "
-                employee += f"receives a commission for {self.no_of_contracts} contract(s) at {self.comm_pay}/contract"
+             employee += "and receives a commission for "
+             if self.no_of_contracts > 0:
+                 employee += f"{self.no_of_contracts} contract(s) at {self.comm_pay}/contract "
+             else:
+                 employee += f"a bonus commission of {self.comm_pay} "
+                 if self.salary_pay > 0 or (self.hourly_pay > 0 and self.hours_worked > 0):
+                     employee += " and "
+                 employee += f"receives a commission for {self.no_of_contracts} contract(s) at {self.comm_pay}/contract"
 
         if self.bonus_pay > 0:
-            if self.salary_pay > 0 or (self.hourly_pay > 0 and self.hours_worked > 0) or self.no_of_contracts > 0:
-                employee += " and "
-            employee += f"receives a bonus commission of {self.bonus_pay}"
+             if self.salary_pay > 0 or (self.hourly_pay > 0 and self.hours_worked > 0) or self.no_of_contracts > 0:
+                 employee += " and "
+             employee += f"receives a bonus commission of {self.bonus_pay}"
 
         employee += f". Their total pay is {self.get_pay()}."
         return employee.strip()
