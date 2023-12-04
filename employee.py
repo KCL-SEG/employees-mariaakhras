@@ -1,5 +1,6 @@
 """Employee pay calculator."""
 """ENTER YOUR SOLUTION HERE!"""
+
 class Employee:
     def __init__(self, name):
         self.name = name
@@ -11,24 +12,17 @@ class Employee:
         self.bonus_pay = 0
     def set_salary(self, salary_pay):
         self.salary_pay = salary_pay
+
     def set_hourly(self, hourly_pay, hours_worked):
         self.hourly_pay = hourly_pay
         self.hours_worked = hours_worked
+        
     def set_comm(self, comm_pay, no_of_contracts=0):
         self.comm_pay = comm_pay
         self.no_of_contracts = no_of_contracts
+        
     def set_bonus(self, bonus_pay):
-        self.bonus_pay = bonus_pay
-        # Salary or hourly pay calculation
-        if self.contract_type == "Salary":
-            total_pay += self.monthly_salary
-        elif self.contract_type == "Hourly":
-            total_pay += self.hourly_wage * self.hours_worked
-        # Commission calculation
-        if self.commission_type == "Bonus":
-            total_pay += self.commission_value
-        elif self.commission_type == "Contract":
-            total_pay += self.num_contracts * self.commission_value
+         self.bonus_pay = bonus_pay
 
     def get_salary(self):
         return self.salary_pay + self.comm_pay * self.hourly_pay
